@@ -12,7 +12,7 @@ Roya Zeinali
 We started with the code for connect 4 without AI to familiarize ourselves with it and make some additions.
  - We contributed color scheme (CSUF) colors
  - implemented a "play again" button
- - had AI say random quotes as player made a move
+ - had AI say random quotes as player made a move <br><br>
 
 
 
