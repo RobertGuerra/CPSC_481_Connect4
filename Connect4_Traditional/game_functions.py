@@ -49,16 +49,15 @@ class Button:
         self.rect.x = x
         self.rect.y = y
 
+
     def draw(self):
 
         # get mouse position
         pos = pygame.mouse.get_pos()
 
-        # check mouse over and click condition
-        for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if self.rect.collidepoint(pos):
-                    print("left click")
+        #check mouseover and clicked condition
+        if self.rect.collidepoint(pos):
+            print('Mouse over')
 
         # draw button on screen
         screen.blit(self.image, (self.rect.x, self.rect.y))
