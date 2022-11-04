@@ -8,7 +8,7 @@ game_over = False
 turn = 0
 
 # create button instances
-playAgain_button = Button(100, 200, playAgainImg, 0.5)
+playAgain_button = Button(435, 0, playAgainImg, 0.5)
 
 while not game_over:
 
@@ -92,5 +92,5 @@ while not game_over:
         playAgain_button.draw()
         pygame.display.update()
 
-        time.sleep(10)
+        time.sleep(3)
 
