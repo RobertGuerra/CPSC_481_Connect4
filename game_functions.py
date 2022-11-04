@@ -32,7 +32,7 @@ screen = pygame.display.set_mode(size)
 pygame.display.update()
 
 # font for the screen text
-textFont = pygame.font.SysFont("Consolas", 75)
+textFont = pygame.font.SysFont("Consolas", 24)
 quoteFont = pygame.font.SysFont("Consolas", 18)
 
 # load button images
