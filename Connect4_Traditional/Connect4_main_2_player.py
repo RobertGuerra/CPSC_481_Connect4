@@ -18,7 +18,6 @@ while not game_over:
 
     random_quote = random.randint(0, 6)
 
-
     # since pygame is based on events we can use to our advantage
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
