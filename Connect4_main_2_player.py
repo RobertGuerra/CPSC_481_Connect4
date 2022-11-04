@@ -77,7 +77,7 @@ while not game_over:
                     print_board(board)
 
                     if winning_move(board, 2):
-                        label = textFont.render("player 2 wins!!", 1, WHITE)
+                        label = textFont.render("So simple, typical human!", 1, WHITE)
                         screen.blit(label, (40, 10))
                         game_over = True
 
