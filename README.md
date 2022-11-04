@@ -2,9 +2,9 @@
 
 CPSC 481 class project -  connect 4 with AI
 
-Roberto Guerra
-Dung Tran
-Roya Zeinali
+Roberto Guerra<br>
+Dung Tran<br>
+Roya Zeinali<br>
 
 ###########################################################################
 
