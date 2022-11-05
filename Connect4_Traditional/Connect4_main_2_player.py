@@ -69,7 +69,6 @@ while not game_over:
                         label = textFont.render("player 1 wins!!", 1, ORANGE)
                         screen.blit(label, (40,10))
                         game_over = True
-                        break
                     turn = 1
 
             # ask for player 2 input
@@ -87,7 +86,6 @@ while not game_over:
                         label = textFont.render("So simple, typical human!", 1, WHITE)
                         screen.blit(label, (40, 10))
                         game_over = True
-                        break
                     turn = 0
 
 
