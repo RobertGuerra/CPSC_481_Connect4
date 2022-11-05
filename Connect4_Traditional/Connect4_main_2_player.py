@@ -1,14 +1,18 @@
 import time
+
+import pygame.time
+
+import game_functions
+from game_functions import *
 import math
 import sys
 import random
-from game_functions import *
 
 game_over = False
-turn = 0
+turn =  0
 
 # create button instances
-playAgain_button = Button(435, 0, playAgainImg, 0.5)
+playAgain_button = game_functions.Button(435, 0, playAgainImg, 0.5)
 
 while not game_over:
 
@@ -17,6 +21,7 @@ while not game_over:
               "Am I playing a child?"]
 
     random_quote = random.randint(0, 6)
+
 
     # since pygame is based on events we can use to our advantage
     for event in pygame.event.get():
@@ -31,8 +36,10 @@ while not game_over:
             # now draw the circles
             posx = event.pos[0]
             if turn == 0:
+                # for when player one goes
                 pygame.draw.circle(screen, ORANGE, (posx, int(SQUARE_SIZE/2)), RADIUS)
             else:
+                # for when player two goes
                 pygame.draw.circle(screen, WHITE, (posx, int(SQUARE_SIZE / 2)), RADIUS)
         # update display
         pygame.display.update()
@@ -63,6 +70,7 @@ while not game_over:
                         label = textFont.render("player 1 wins!!", 1, ORANGE)
                         screen.blit(label, (40,10))
                         game_over = True
+                    turn = 1
 
             # ask for player 2 input
             else:
@@ -79,17 +87,14 @@ while not game_over:
                         label = textFont.render("So simple, typical human!", 1, WHITE)
                         screen.blit(label, (40, 10))
                         game_over = True
+                    turn = 0
 
-            # draw board
-            draw_board(board)
 
-            # change player turn
-            turn += 1
-            turn = turn % 2
+    # draw board
+    draw_board(board)
+    pygame.display.update()
 
     if game_over:
         playAgain_button.draw()
         pygame.display.update()
-
-        time.sleep(3)
-
+        pygame.time.delay(3000)
