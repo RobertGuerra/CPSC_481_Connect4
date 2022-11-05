@@ -1,6 +1,7 @@
 import numpy as np
 import pygame
 
+
 # global variables
 ROW_COUNT = 6
 COLUMN_COUNT = 7
@@ -46,8 +47,10 @@ class Button:
         height = image.get_height()
         self.image = pygame.transform.scale(image, (int(width * scale), int(height * scale)))
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+        self.rect.topleft = (x,y)
+        # self.rect.x = x
+        # self.rect.y = y
+        self.clicked = False
 
 
     def draw(self):
@@ -55,16 +58,11 @@ class Button:
         # get mouse position
         pos = pygame.mouse.get_pos()
 
-        #check mouseover and clicked condition
-        if self.rect.collidepoint(pos):
-            print('Mouse over')
-
         # draw button on screen
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
 
-
-#  FUNCTIONS #
+#  FUNCTIONS # FUNCTIONS # FUNCTIONS # FUNCTIONS # FUNCTIONS # FUNCTIONS #
 def create_board(): # makes initial array board filled with zeros
     game_board = np.zeros((ROW_COUNT,COLUMN_COUNT))
     return game_board
@@ -80,10 +78,6 @@ def get_next_open_row(board, col):
         if board[r][col] == 0:
             return r
 
-def print_board(board):
-    print(np.flip(board, 0))
-
-# video two
 def winning_move(board, piece):
     # check horizontal locations for win
     for c in range (COLUMN_COUNT - 3):
@@ -138,14 +132,7 @@ def draw_board(board):
     # update display
     pygame.display.update()
 
-#  FUNCTIONS #
+#  FUNCTIONS # FUNCTIONS # FUNCTIONS # FUNCTIONS # FUNCTIONS # FUNCTIONS #
 
 
-# call game functions
 
-board = create_board()
-
-# show initial game board
-print_board(board)
-
-draw_board(board)
