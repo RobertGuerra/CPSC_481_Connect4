@@ -1,7 +1,3 @@
-import time
-
-import pygame.time
-
 import game_functions
 from game_functions import *
 import math
@@ -11,8 +7,12 @@ import random
 game_over = False
 turn =  0
 
-# create button instances
+# create button instance
 playAgain_button = game_functions.Button(435, 0, playAgainImg, 0.5)
+
+# Create board instance
+board = create_board()
+draw_board(board)
 
 while not game_over:
 
@@ -53,7 +53,7 @@ while not game_over:
             if turn == 0:
                 #col = int(input("Player 1 Make your Selection (0-6): "))
 
-                # lest have the event help us figure out where our mouse cursor is
+                # lets have the event help us figure out where our mouse cursor is
                 posx = event.pos[0]
                 col = int(math.floor(posx/SQUARE_SIZE))
 
@@ -63,13 +63,13 @@ while not game_over:
                     the_quote = quotes[random_quote]
                     label_quote = quoteFont.render("AI says: " + the_quote, 2, WHITE)
                     screen.blit(label_quote, (40, 10))
-                    print_board(board)
 
                     if winning_move(board, 1):
                         pygame.draw.rect(screen, BLACK, (0, 0, width, SQUARE_SIZE))
                         label = textFont.render("player 1 wins!!", 1, ORANGE)
                         screen.blit(label, (40,10))
                         game_over = True
+                        break
                     turn = 1
 
             # ask for player 2 input
@@ -81,12 +81,13 @@ while not game_over:
                 if is_valid_location(board, col):
                     row = get_next_open_row(board, col)
                     drop_piece(board, row, col, 2)
-                    print_board(board)
+
 
                     if winning_move(board, 2):
                         label = textFont.render("So simple, typical human!", 1, WHITE)
                         screen.blit(label, (40, 10))
                         game_over = True
+                        break
                     turn = 0
 
 
