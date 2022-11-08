@@ -82,7 +82,8 @@ while not game_over:
 
         # Have AI choose a random location
         # col = random.randint(0, COLUMN_COUNT - 1)
-        col = ai_pick_best_move(board, AI_PIECE)
+        # col = ai_pick_best_move(board, AI_PIECE)
+        col, minimax_score = minimax(board, 4, -math.inf, math.inf, True)
 
         if is_valid_location(board, col):
             pygame.time.wait(500)
