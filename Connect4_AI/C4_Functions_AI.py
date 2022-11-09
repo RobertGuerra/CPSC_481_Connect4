@@ -1,9 +1,8 @@
 import math
 import random
-
 import numpy as np
 import pygame
-from pygame.locals import *
+
 
 # global variables
 ROW_COUNT = 6
@@ -45,39 +44,9 @@ pygame.display.update()
 textFont = pygame.font.SysFont("Consolas", 24)
 quoteFont = pygame.font.SysFont("Consolas", 18)
 
-# load button images
-playAgainImg = pygame.image.load('playAgain.png').convert_alpha()
-
-
-# button class
-class Button:
-    def __init__(self, x, y, image, scale):
-        #get the width and height
-        width = image.get_width()
-        height = image.get_height()
-        self.image = pygame.transform.scale(image, (int(width * scale), int(height * scale)))
-        self.rect = self.image.get_rect()
-        self.rect.topleft = (x,y)
-        # self.rect.x = x
-        # self.rect.y = y
-        self.clicked = False
-
-    def draw(self):
-
-        # get mouse position
-        pos = pygame.mouse.get_pos()
-
-        #check mouseover and clicked
-        if self.rect.collidepoint(pos):
-            for event in pygame.event.get():
-                if event.type == MOUSEBUTTONDOWN:
-                    print("Clicked on Button")
-
-        # draw button on screen
-        screen.blit(self.image, (self.rect.x, self.rect.y))
-
 
 #  FUNCTIONS # FUNCTIONS # FUNCTIONS # FUNCTIONS # FUNCTIONS # FUNCTIONS #
+
 def create_board(): # makes initial array board filled with zeros
     game_board = np.zeros((ROW_COUNT,COLUMN_COUNT))
     return game_board
@@ -282,8 +251,3 @@ def draw_board(board):
 
     # update display
     pygame.display.update()
-
-#  FUNCTIONS # FUNCTIONS # FUNCTIONS # FUNCTIONS # FUNCTIONS # FUNCTIONS #
-
-
-
