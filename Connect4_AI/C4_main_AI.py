@@ -1,8 +1,8 @@
 from C4_Functions_AI import *
+from button import *
 import math
 import sys
 import random
-from button import *
 
 BG = pygame.image.load("assets/Background.png")
 
@@ -84,7 +84,7 @@ def play():
         if turn == AI and not game_over:
 
             # level of difficulty
-            col, minimax_score = minimax(board, 1, -math.inf, math.inf, True)
+            col, minimax_score = minimax(board, 4, -math.inf, math.inf, True)
 
             if is_valid_location(board, col):
                 row = get_next_open_row(board, col)
@@ -105,6 +105,8 @@ def play():
         if game_over:
             pygame.time.delay(3000)
 
+
+# Menu Functions
 def options():
     while True:
         OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
