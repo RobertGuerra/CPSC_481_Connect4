@@ -1,3 +1,5 @@
+import pygame.mixer_music
+
 from C4_Functions_AI import *
 from button import *
 import math
@@ -5,6 +7,9 @@ import sys
 import random
 
 BG = pygame.image.load("assets/Background.png")
+
+Player_end_game_sound = pygame.mixer.Sound("magical-game-over.wav")
+AI_end_game_sound = pygame.mixer.Sound("retro-game-over.wav")
 
 def get_font(size): # Returns Press-Start-2P in the desired size
     return pygame.font.Font("assets/font.ttf", size)
@@ -21,6 +26,11 @@ def play():
 
     # let's randomize who goes first
     turn = random.randint(PLAYER, AI)
+
+    try:
+        pygame.mixer.music.play(-1)
+    except:
+        pass
 
     while not game_over:
 
@@ -55,7 +65,6 @@ def play():
 
                 # ask for player 1 input
                 if turn == PLAYER:
-                    # col = int(input("Player 1 Make your Selection (0-6): "))
 
                     # lets have the event help us figure out where our mouse cursor is
                     posx = event.pos[0]
@@ -74,6 +83,8 @@ def play():
                             label = textFont.render("player 1 wins!!", 1, ORANGE)
                             screen.blit(label, (40, 10))
                             game_over = True
+                            pygame.mixer.music.stop()
+                            pygame.mixer.Sound.play(AI_end_game_sound)
                         turn = AI
 
         # draw board
@@ -96,6 +107,8 @@ def play():
                     label = textFont.render("So simple, typical human!", 1, WHITE)
                     screen.blit(label, (40, 10))
                     game_over = True
+                    pygame.mixer.music.stop()
+                    pygame.mixer.Sound.play(AI_end_game_sound)
                 turn = PLAYER
 
         # draw board
@@ -103,6 +116,8 @@ def play():
         pygame.display.update()
 
         if game_over:
+            # pygame.time.delay(1500)
+            # pygame.mixer.music.stop()
             pygame.time.delay(3000)
 
 
@@ -118,14 +133,21 @@ def options():
         screen.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
         OPTIONS_DIFFICULTY = Button(image=None, pos=(300, 360),
-                                    text_input="Difficulty", font=get_font(20), base_color=WHITE,
+                                    text_input="Difficulty", font=get_font(36), base_color=WHITE,
                                     hovering_color=ORANGE)
 
         OPTIONS_DIFFICULTY.changeColor(OPTIONS_MOUSE_POS)
         OPTIONS_DIFFICULTY.update(screen)
 
-        OPTIONS_BACK = Button(image=None, pos=(300, 400),
-                              text_input="Back", font=get_font(20), base_color=WHITE, hovering_color=ORANGE)
+        OPTIONS_MUSIC = Button(image=None, pos=(300, 430),
+                                    text_input="Music", font=get_font(36), base_color=WHITE,
+                                    hovering_color=ORANGE)
+
+        OPTIONS_MUSIC.changeColor(OPTIONS_MOUSE_POS)
+        OPTIONS_MUSIC.update(screen)
+
+        OPTIONS_BACK = Button(image=None, pos=(300, 500),
+                              text_input="Back", font=get_font(36), base_color=WHITE, hovering_color=ORANGE)
 
         OPTIONS_BACK.changeColor(OPTIONS_MOUSE_POS)
         OPTIONS_BACK.update(screen)
@@ -139,6 +161,8 @@ def options():
                     main_menu()
                 if OPTIONS_DIFFICULTY.checkForInput(OPTIONS_MOUSE_POS):
                     difficulty()
+                if OPTIONS_MUSIC.checkForInput(OPTIONS_MOUSE_POS):
+                    music()
 
         pygame.display.update()
 
@@ -184,6 +208,94 @@ def difficulty():
                     main_menu()
                 if DIFFICULTY_HARD.checkForInput(DIFFICULTY_MOUSE_POS):
                     level = 6
+                    main_menu()
+
+        pygame.display.update()
+
+def music():
+    while True:
+        MUSIC_OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
+
+        screen.fill(BLUE)
+
+        OPTIONS_TEXT = get_font(24).render("Select your favorite sound.", True, WHITE)
+        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(300, 260))
+        screen.blit(OPTIONS_TEXT, OPTIONS_RECT)
+
+        MUSIC_OPTIONS_STRANGER = Button(image=None, pos=(300, 310),
+                                     text_input="Stranger things", font=get_font(20), base_color=WHITE,
+                                     hovering_color=ORANGE)
+
+        MUSIC_OPTIONS_STRANGER.changeColor(MUSIC_OPTIONS_MOUSE_POS)
+        MUSIC_OPTIONS_STRANGER.update(screen)
+
+        MUSIC_OPTIONS_RETRO = Button(image=None, pos=(300, 350),
+                                        text_input="Stay Retro", font=get_font(20), base_color=WHITE,
+                                        hovering_color=ORANGE)
+
+        MUSIC_OPTIONS_RETRO.changeColor(MUSIC_OPTIONS_MOUSE_POS)
+        MUSIC_OPTIONS_RETRO.update(screen)
+
+        MUSIC_OPTIONS_NIGHT = Button(image=None, pos=(300, 390),
+                                     text_input="Night Run", font=get_font(20), base_color=WHITE,
+                                     hovering_color=ORANGE)
+
+        MUSIC_OPTIONS_NIGHT.changeColor(MUSIC_OPTIONS_MOUSE_POS)
+        MUSIC_OPTIONS_NIGHT.update(screen)
+
+        MUSIC_OPTIONS_LEGENDS = Button(image=None, pos=(300, 430),
+                                     text_input="Lightyear Legends", font=get_font(20), base_color=WHITE,
+                                     hovering_color=ORANGE)
+
+        MUSIC_OPTIONS_LEGENDS.changeColor(MUSIC_OPTIONS_MOUSE_POS)
+        MUSIC_OPTIONS_LEGENDS.update(screen)
+
+        MUSIC_OPTIONS_COLOR = Button(image=None, pos=(300, 470),
+                                     text_input="playing in color", font=get_font(20), base_color=WHITE,
+                                     hovering_color=ORANGE)
+
+        MUSIC_OPTIONS_COLOR.changeColor(MUSIC_OPTIONS_MOUSE_POS)
+        MUSIC_OPTIONS_COLOR.update(screen)
+
+        MUSIC_OPTIONS_DUCK = Button(image=None, pos=(300, 510),
+                                    text_input="Fluffing a Duck", font=get_font(20), base_color=WHITE,
+                                    hovering_color=ORANGE)
+
+        MUSIC_OPTIONS_DUCK.changeColor(MUSIC_OPTIONS_MOUSE_POS)
+        MUSIC_OPTIONS_DUCK.update(screen)
+
+        MUSIC_OPTIONS_FLIGHT = Button(image=None, pos=(300, 550),
+                                    text_input="Falkor Flight", font=get_font(20), base_color=WHITE,
+                                    hovering_color=ORANGE)
+
+        MUSIC_OPTIONS_FLIGHT.changeColor(MUSIC_OPTIONS_MOUSE_POS)
+        MUSIC_OPTIONS_FLIGHT.update(screen)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if MUSIC_OPTIONS_STRANGER.checkForInput(MUSIC_OPTIONS_MOUSE_POS):
+                    pygame.mixer_music.load('music/stranger-things.mp3')
+                    main_menu()
+                if MUSIC_OPTIONS_RETRO.checkForInput(MUSIC_OPTIONS_MOUSE_POS):
+                    pygame.mixer_music.load('music/stay-retro.mp3')
+                    main_menu()
+                if MUSIC_OPTIONS_NIGHT.checkForInput(MUSIC_OPTIONS_MOUSE_POS):
+                    pygame.mixer_music.load('music/night-run.mp3')
+                    main_menu()
+                if MUSIC_OPTIONS_LEGENDS.checkForInput(MUSIC_OPTIONS_MOUSE_POS):
+                    pygame.mixer_music.load('music/lightyear-legends.mp3')
+                    main_menu()
+                if MUSIC_OPTIONS_COLOR.checkForInput(MUSIC_OPTIONS_MOUSE_POS):
+                    pygame.mixer_music.load('music/playing-in-color.mp3')
+                    main_menu()
+                if MUSIC_OPTIONS_DUCK.checkForInput(MUSIC_OPTIONS_MOUSE_POS):
+                    pygame.mixer_music.load('music/Fluffing-a-Duck.mp3')
+                    main_menu()
+                if MUSIC_OPTIONS_FLIGHT.checkForInput(MUSIC_OPTIONS_MOUSE_POS):
+                    pygame.mixer_music.load('music/falkor-flight.mp3')
                     main_menu()
 
         pygame.display.update()
