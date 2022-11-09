@@ -3,7 +3,6 @@ import random
 import numpy as np
 import pygame
 
-
 # global variables
 ROW_COUNT = 6
 COLUMN_COUNT = 7
@@ -251,3 +250,5 @@ def draw_board(board):
 
     # update display
     pygame.display.update()
+
+
