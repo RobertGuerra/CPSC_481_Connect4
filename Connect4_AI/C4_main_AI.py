@@ -111,19 +111,19 @@ def options():
 
         screen.fill(BLUE)
 
-        OPTIONS_TEXT = get_font(18).render("Select your option.", True, ORANGE)
-        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(200, 260))
+        OPTIONS_TEXT = get_font(24).render("Select your option.", True, WHITE)
+        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(300, 260))
         screen.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
-        OPTIONS_DIFFICULTY = Button(image=None, pos=(200, 360),
-                                    text_input="Difficulty", font=get_font(16), base_color=ORANGE,
-                                    hovering_color="Green")
+        OPTIONS_DIFFICULTY = Button(image=None, pos=(300, 360),
+                                    text_input="Difficulty", font=get_font(20), base_color=WHITE,
+                                    hovering_color=ORANGE)
 
         OPTIONS_DIFFICULTY.changeColor(OPTIONS_MOUSE_POS)
         OPTIONS_DIFFICULTY.update(screen)
 
-        OPTIONS_BACK = Button(image=None, pos=(200, 400),
-                              text_input="Back", font=get_font(16), base_color=ORANGE, hovering_color="Green")
+        OPTIONS_BACK = Button(image=None, pos=(300, 400),
+                              text_input="Back", font=get_font(20), base_color=WHITE, hovering_color=ORANGE)
 
         OPTIONS_BACK.changeColor(OPTIONS_MOUSE_POS)
         OPTIONS_BACK.update(screen)
@@ -146,25 +146,25 @@ def difficulty():
         DIFFICULTY_MOUSE_POS = pygame.mouse.get_pos()
         screen.fill(BLUE)
 
-        OPTIONS_TEXT = get_font(18).render("Select your Difficulty!", True, ORANGE)
-        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(200, 260))
+        OPTIONS_TEXT = get_font(18).render("Select your Difficulty!", True, WHITE)
+        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(300, 260))
         screen.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
-        DIFFICULTY_EASY = Button(image=None, pos=(200, 350),
-                                 text_input="Easy", font=get_font(36), base_color=ORANGE,
-                                 hovering_color="Green")
+        DIFFICULTY_EASY = Button(image=None, pos=(300, 350),
+                                 text_input="Easy", font=get_font(36), base_color=WHITE,
+                                 hovering_color=ORANGE)
 
         DIFFICULTY_EASY.changeColor(DIFFICULTY_MOUSE_POS)
         DIFFICULTY_EASY.update(screen)
 
-        DIFFICULTY_MEDIUM = Button(image=None, pos=(200, 450),
-                                   text_input="Medium", font=get_font(36), base_color=ORANGE, hovering_color="Green")
+        DIFFICULTY_MEDIUM = Button(image=None, pos=(300, 450),
+                                   text_input="Medium", font=get_font(36), base_color=WHITE, hovering_color=ORANGE)
 
         DIFFICULTY_MEDIUM.changeColor(DIFFICULTY_MOUSE_POS)
         DIFFICULTY_MEDIUM.update(screen)
 
-        DIFFICULTY_HARD = Button(image=None, pos=(200, 550),
-                                 text_input="Hard", font=get_font(36), base_color=ORANGE, hovering_color="Green")
+        DIFFICULTY_HARD = Button(image=None, pos=(300, 550),
+                                 text_input="Hard", font=get_font(36), base_color=WHITE, hovering_color=ORANGE)
 
         DIFFICULTY_HARD.changeColor(DIFFICULTY_MOUSE_POS)
         DIFFICULTY_HARD.update(screen)
@@ -193,13 +193,13 @@ def main_menu():
         MENU_MOUSE_POS = pygame.mouse.get_pos()
 
         MENU_TEXT = get_font(36).render("MAIN MENU", True, "#b68f40")
-        MENU_RECT = MENU_TEXT.get_rect(center=(200, 100))
+        MENU_RECT = MENU_TEXT.get_rect(center=(300, 100))
 
-        PLAY_BUTTON = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(200, 250),
-                             text_input="PLAY", font=get_font(24), base_color="#d7fcd4", hovering_color=ORANGE)
-        OPTIONS_BUTTON = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(200, 400),
+        PLAY_BUTTON = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(300, 250),
+                             text_input="PLAY", font=get_font(24), base_color=WHITE, hovering_color=ORANGE)
+        OPTIONS_BUTTON = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(300, 400),
                                 text_input="OPTIONS", font=get_font(24), base_color="#d7fcd4", hovering_color=ORANGE)
-        QUIT_BUTTON = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(200, 550),
+        QUIT_BUTTON = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(300, 550),
                              text_input="QUIT", font=get_font(24), base_color="#d7fcd4", hovering_color=ORANGE)
 
         screen.blit(MENU_TEXT, MENU_RECT)
