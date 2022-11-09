@@ -196,11 +196,11 @@ def main_menu():
         MENU_RECT = MENU_TEXT.get_rect(center=(200, 100))
 
         PLAY_BUTTON = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(200, 250),
-                             text_input="PLAY", font=get_font(24), base_color="#d7fcd4", hovering_color="White")
+                             text_input="PLAY", font=get_font(24), base_color="#d7fcd4", hovering_color=ORANGE)
         OPTIONS_BUTTON = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(200, 400),
-                                text_input="OPTIONS", font=get_font(24), base_color="#d7fcd4", hovering_color="White")
+                                text_input="OPTIONS", font=get_font(24), base_color="#d7fcd4", hovering_color=ORANGE)
         QUIT_BUTTON = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(200, 550),
-                             text_input="QUIT", font=get_font(24), base_color="#d7fcd4", hovering_color="White")
+                             text_input="QUIT", font=get_font(24), base_color="#d7fcd4", hovering_color=ORANGE)
 
         screen.blit(MENU_TEXT, MENU_RECT)
 
