@@ -103,12 +103,4 @@ while not game_over:
             pygame.display.update()
 
     if game_over:
-        time.sleep(2)
-        playAgain_button.draw()
-        pygame.display.update()
-        # pygame.draw.rect(screen, BLACK, (0, 0, width, SQUARE_SIZE))
-        # label4 = textFont.render("PRESS SPACEBAR TO PLAY AGAIN!", 1, WHITE)
-        # screen.blit(label4, (40, 10))
-        # # draw_board(board)
-        # pygame.display.update()
         pygame.time.delay(3000)
