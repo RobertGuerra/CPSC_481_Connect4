@@ -8,6 +8,9 @@ Roya Zeinali<br>
 
 ###########################################################################
 
+## Example Game Play:
+<img src="connect4.gif" alt="AI winning">
+
 
 We started with the code for connect 4 without AI to familiarize ourselves with it and make some additions.
  - We contributed color scheme (CSUF) colors
