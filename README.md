@@ -9,8 +9,8 @@ Roya Zeinali<br>
 ###########################################################################
 
 ## Example Game Play:
-<img src="game_play.gif" alt="connect 4">
-
+#<img src="game_play.gif" alt="connect 4">
+![game_play](https://github.com/RobertGuerra/CPSC_481_Connect4/blob/main/game_play.gif)
 
 We started with the code for connect 4 without AI to familiarize ourselves with the code and functionality.<br>
 Here are the additions we made for our project:
