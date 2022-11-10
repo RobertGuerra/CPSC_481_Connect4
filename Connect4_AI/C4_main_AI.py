@@ -14,7 +14,7 @@ AI_end_game_sound = pygame.mixer.Sound("retro-game-over.wav")
 def get_font(size): # Returns Press-Start-2P in the desired size
     return pygame.font.Font("assets/font.ttf", size)
 
-def play():
+def play(level):
 
     game_over = False
     PLAYER = 0
@@ -33,6 +33,8 @@ def play():
         pass
 
     while not game_over:
+
+        pygame.time.wait(100)
 
         quotes = ["wow, that's your move?", "Haha, please :)", "uhm, you sure about that?",
                   "You might want to rethink that move", "I saw that move coming", "Lame!",
@@ -84,7 +86,7 @@ def play():
                             screen.blit(label, (40, 10))
                             game_over = True
                             pygame.mixer.music.stop()
-                            pygame.mixer.Sound.play(AI_end_game_sound)
+                            pygame.mixer.Sound.play(Player_end_game_sound)
                         turn = AI
 
         # draw board
@@ -95,7 +97,7 @@ def play():
         if turn == AI and not game_over:
 
             # level of difficulty
-            col, minimax_score = minimax(board, 4, -math.inf, math.inf, True)
+            col, minimax_score = minimax(board, level, -math.inf, math.inf, True)
 
             if is_valid_location(board, col):
                 row = get_next_open_row(board, col)
@@ -116,38 +118,74 @@ def play():
         pygame.display.update()
 
         if game_over:
-            # pygame.time.delay(1500)
-            # pygame.mixer.music.stop()
             pygame.time.delay(3000)
 
 
-# Menu Functions
+# main menu
+def main_menu():
+    while True:
+        screen.blit(BG, (0, 0))
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        MENU_TEXT = get_font(36).render("MAIN MENU", True, WHITE)
+        MENU_RECT = MENU_TEXT.get_rect(center=(300, 100))
+
+        # PLAY_BUTTON = Button(None, pos=(300, 250),
+        #                      text_input="Difficulty", font=get_font(24), base_color=WHITE, hovering_color=ORANGE)
+        OPTIONS_BUTTON = Button(None, pos=(300, 250),
+                                text_input="OPTIONS", font=get_font(24), base_color="#d7fcd4", hovering_color=ORANGE)
+        QUIT_BUTTON = Button(None, pos=(300, 350),
+                             text_input="QUIT", font=get_font(24), base_color="#d7fcd4", hovering_color=ORANGE)
+
+        screen.blit(MENU_TEXT, MENU_RECT)
+
+        for button in [OPTIONS_BUTTON, QUIT_BUTTON]:
+            button.changeColor(MENU_MOUSE_POS)
+            button.update(screen)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                # if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
+                #     difficulty()
+                if OPTIONS_BUTTON.checkForInput(MENU_MOUSE_POS):
+                    options()
+                if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS):
+                    pygame.quit()
+                    sys.exit()
+
+        pygame.display.update()
+
+# Main Menu - Sub menus
 def options():
     while True:
         OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
 
-        screen.fill(BLUE)
+        screen.blit(BG, (0, 0))
 
         OPTIONS_TEXT = get_font(24).render("Select your option.", True, WHITE)
-        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(300, 260))
+        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(300, 50))
         screen.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
-        OPTIONS_DIFFICULTY = Button(image=None, pos=(300, 360),
-                                    text_input="Difficulty", font=get_font(36), base_color=WHITE,
+        OPTIONS_DIFFICULTY = Button(image=None, pos=(300, 150),
+                                    text_input="Play", font=get_font(36), base_color=WHITE,
                                     hovering_color=ORANGE)
 
         OPTIONS_DIFFICULTY.changeColor(OPTIONS_MOUSE_POS)
         OPTIONS_DIFFICULTY.update(screen)
 
-        OPTIONS_MUSIC = Button(image=None, pos=(300, 430),
+        OPTIONS_MUSIC = Button(image=None, pos=(300, 250),
                                     text_input="Music", font=get_font(36), base_color=WHITE,
                                     hovering_color=ORANGE)
 
         OPTIONS_MUSIC.changeColor(OPTIONS_MOUSE_POS)
         OPTIONS_MUSIC.update(screen)
 
-        OPTIONS_BACK = Button(image=None, pos=(300, 500),
-                              text_input="Back", font=get_font(36), base_color=WHITE, hovering_color=ORANGE)
+        OPTIONS_BACK = Button(image=None, pos=(300, 350),
+                              text_input="Back to main menu", font=get_font(24), base_color=WHITE, hovering_color=ORANGE)
 
         OPTIONS_BACK.changeColor(OPTIONS_MOUSE_POS)
         OPTIONS_BACK.update(screen)
@@ -170,30 +208,43 @@ def difficulty():
 
     while True:
         DIFFICULTY_MOUSE_POS = pygame.mouse.get_pos()
-        screen.fill(BLUE)
 
-        OPTIONS_TEXT = get_font(18).render("Select your Difficulty!", True, WHITE)
-        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(300, 260))
+        screen.blit(BG, (0, 0))
+
+        OPTIONS_TEXT = get_font(18).render("Choose to Play", True, WHITE)
+        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(300, 50))
         screen.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
-        DIFFICULTY_EASY = Button(image=None, pos=(300, 350),
+        DIFFICULTY_EASY = Button(image=None, pos=(300, 150),
                                  text_input="Easy", font=get_font(36), base_color=WHITE,
                                  hovering_color=ORANGE)
 
         DIFFICULTY_EASY.changeColor(DIFFICULTY_MOUSE_POS)
         DIFFICULTY_EASY.update(screen)
 
-        DIFFICULTY_MEDIUM = Button(image=None, pos=(300, 450),
+        DIFFICULTY_MEDIUM = Button(image=None, pos=(300, 250),
                                    text_input="Medium", font=get_font(36), base_color=WHITE, hovering_color=ORANGE)
 
         DIFFICULTY_MEDIUM.changeColor(DIFFICULTY_MOUSE_POS)
         DIFFICULTY_MEDIUM.update(screen)
 
-        DIFFICULTY_HARD = Button(image=None, pos=(300, 550),
+        DIFFICULTY_HARD = Button(image=None, pos=(300, 350),
                                  text_input="Hard", font=get_font(36), base_color=WHITE, hovering_color=ORANGE)
 
         DIFFICULTY_HARD.changeColor(DIFFICULTY_MOUSE_POS)
         DIFFICULTY_HARD.update(screen)
+
+        DIFFICULTY_INSANE = Button(image=None, pos=(300, 450),
+                                 text_input="Insane", font=get_font(36), base_color=WHITE, hovering_color=ORANGE)
+
+        DIFFICULTY_INSANE.changeColor(DIFFICULTY_MOUSE_POS)
+        DIFFICULTY_INSANE.update(screen)
+
+        DIFFICULTY_BACK = Button(image=None, pos=(300, 550),
+                              text_input="Back to options", font=get_font(36), base_color=WHITE, hovering_color=ORANGE)
+
+        DIFFICULTY_BACK.changeColor(DIFFICULTY_MOUSE_POS)
+        DIFFICULTY_BACK.update(screen)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -202,13 +253,18 @@ def difficulty():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if DIFFICULTY_EASY.checkForInput(DIFFICULTY_MOUSE_POS):
                     level = 1
-                    main_menu()
+                    play(level)
                 if DIFFICULTY_MEDIUM.checkForInput(DIFFICULTY_MOUSE_POS):
-                    level = 3
-                    main_menu()
+                    level = 2
+                    play(level)
                 if DIFFICULTY_HARD.checkForInput(DIFFICULTY_MOUSE_POS):
+                    level = 4
+                    play(level)
+                if DIFFICULTY_INSANE.checkForInput(DIFFICULTY_MOUSE_POS):
                     level = 6
-                    main_menu()
+                    play(level)
+                if DIFFICULTY_BACK.checkForInput(DIFFICULTY_MOUSE_POS):
+                    options()
 
         pygame.display.update()
 
@@ -216,55 +272,55 @@ def music():
     while True:
         MUSIC_OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
 
-        screen.fill(BLUE)
+        screen.blit(BG, (0, 0))
 
-        OPTIONS_TEXT = get_font(24).render("Select your favorite sound.", True, WHITE)
-        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(300, 260))
+        OPTIONS_TEXT = get_font(18).render("Select your favorite sound.", True, WHITE)
+        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(300, 50))
         screen.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
-        MUSIC_OPTIONS_STRANGER = Button(image=None, pos=(300, 310),
+        MUSIC_OPTIONS_STRANGER = Button(image=None, pos=(300, 150),
                                      text_input="Stranger things", font=get_font(20), base_color=WHITE,
                                      hovering_color=ORANGE)
 
         MUSIC_OPTIONS_STRANGER.changeColor(MUSIC_OPTIONS_MOUSE_POS)
         MUSIC_OPTIONS_STRANGER.update(screen)
 
-        MUSIC_OPTIONS_RETRO = Button(image=None, pos=(300, 350),
+        MUSIC_OPTIONS_RETRO = Button(image=None, pos=(300, 200),
                                         text_input="Stay Retro", font=get_font(20), base_color=WHITE,
                                         hovering_color=ORANGE)
 
         MUSIC_OPTIONS_RETRO.changeColor(MUSIC_OPTIONS_MOUSE_POS)
         MUSIC_OPTIONS_RETRO.update(screen)
 
-        MUSIC_OPTIONS_NIGHT = Button(image=None, pos=(300, 390),
+        MUSIC_OPTIONS_NIGHT = Button(image=None, pos=(300, 250),
                                      text_input="Night Run", font=get_font(20), base_color=WHITE,
                                      hovering_color=ORANGE)
 
         MUSIC_OPTIONS_NIGHT.changeColor(MUSIC_OPTIONS_MOUSE_POS)
         MUSIC_OPTIONS_NIGHT.update(screen)
 
-        MUSIC_OPTIONS_LEGENDS = Button(image=None, pos=(300, 430),
+        MUSIC_OPTIONS_LEGENDS = Button(image=None, pos=(300, 300),
                                      text_input="Lightyear Legends", font=get_font(20), base_color=WHITE,
                                      hovering_color=ORANGE)
 
         MUSIC_OPTIONS_LEGENDS.changeColor(MUSIC_OPTIONS_MOUSE_POS)
         MUSIC_OPTIONS_LEGENDS.update(screen)
 
-        MUSIC_OPTIONS_COLOR = Button(image=None, pos=(300, 470),
+        MUSIC_OPTIONS_COLOR = Button(image=None, pos=(300, 350),
                                      text_input="playing in color", font=get_font(20), base_color=WHITE,
                                      hovering_color=ORANGE)
 
         MUSIC_OPTIONS_COLOR.changeColor(MUSIC_OPTIONS_MOUSE_POS)
         MUSIC_OPTIONS_COLOR.update(screen)
 
-        MUSIC_OPTIONS_DUCK = Button(image=None, pos=(300, 510),
+        MUSIC_OPTIONS_DUCK = Button(image=None, pos=(300, 400),
                                     text_input="Fluffing a Duck", font=get_font(20), base_color=WHITE,
                                     hovering_color=ORANGE)
 
         MUSIC_OPTIONS_DUCK.changeColor(MUSIC_OPTIONS_MOUSE_POS)
         MUSIC_OPTIONS_DUCK.update(screen)
 
-        MUSIC_OPTIONS_FLIGHT = Button(image=None, pos=(300, 550),
+        MUSIC_OPTIONS_FLIGHT = Button(image=None, pos=(300, 450),
                                     text_input="Falkor Flight", font=get_font(20), base_color=WHITE,
                                     hovering_color=ORANGE)
 
@@ -278,63 +334,28 @@ def music():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if MUSIC_OPTIONS_STRANGER.checkForInput(MUSIC_OPTIONS_MOUSE_POS):
                     pygame.mixer_music.load('music/stranger-things.mp3')
-                    main_menu()
+                    options()
                 if MUSIC_OPTIONS_RETRO.checkForInput(MUSIC_OPTIONS_MOUSE_POS):
                     pygame.mixer_music.load('music/stay-retro.mp3')
-                    main_menu()
+                    options()
                 if MUSIC_OPTIONS_NIGHT.checkForInput(MUSIC_OPTIONS_MOUSE_POS):
                     pygame.mixer_music.load('music/night-run.mp3')
-                    main_menu()
+                    options()
                 if MUSIC_OPTIONS_LEGENDS.checkForInput(MUSIC_OPTIONS_MOUSE_POS):
                     pygame.mixer_music.load('music/lightyear-legends.mp3')
-                    main_menu()
+                    options()
                 if MUSIC_OPTIONS_COLOR.checkForInput(MUSIC_OPTIONS_MOUSE_POS):
                     pygame.mixer_music.load('music/playing-in-color.mp3')
-                    main_menu()
+                    options()
                 if MUSIC_OPTIONS_DUCK.checkForInput(MUSIC_OPTIONS_MOUSE_POS):
                     pygame.mixer_music.load('music/Fluffing-a-Duck.mp3')
-                    main_menu()
+                    options()
                 if MUSIC_OPTIONS_FLIGHT.checkForInput(MUSIC_OPTIONS_MOUSE_POS):
                     pygame.mixer_music.load('music/falkor-flight.mp3')
-                    main_menu()
-
-        pygame.display.update()
-
-def main_menu():
-    while True:
-        screen.blit(BG, (0, 0))
-
-        MENU_MOUSE_POS = pygame.mouse.get_pos()
-
-        MENU_TEXT = get_font(36).render("MAIN MENU", True, WHITE)
-        MENU_RECT = MENU_TEXT.get_rect(center=(300, 100))
-
-        PLAY_BUTTON = Button(None, pos=(300, 250),
-                             text_input="PLAY", font=get_font(24), base_color=WHITE, hovering_color=ORANGE)
-        OPTIONS_BUTTON = Button(None, pos=(300, 350),
-                                text_input="OPTIONS", font=get_font(24), base_color="#d7fcd4", hovering_color=ORANGE)
-        QUIT_BUTTON = Button(None, pos=(300, 450),
-                             text_input="QUIT", font=get_font(24), base_color="#d7fcd4", hovering_color=ORANGE)
-
-        screen.blit(MENU_TEXT, MENU_RECT)
-
-        for button in [PLAY_BUTTON, OPTIONS_BUTTON, QUIT_BUTTON]:
-            button.changeColor(MENU_MOUSE_POS)
-            button.update(screen)
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
-                    play()
-                if OPTIONS_BUTTON.checkForInput(MENU_MOUSE_POS):
                     options()
-                if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS):
-                    pygame.quit()
-                    sys.exit()
 
         pygame.display.update()
 
+
+# Run game
 main_menu()
