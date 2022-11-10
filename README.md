@@ -12,13 +12,17 @@ Roya Zeinali<br>
 <img src="connect4.gif" alt="AI winning">
 
 
-We started with the code for connect 4 without AI to familiarize ourselves with it and make some additions.
- - We contributed color scheme (CSUF) colors
- - implemented a "play again" button
- - had AI say random quotes as player made a move <br><br>
+We started with the code for connect 4 without AI to familiarize ourselves with the code and functionality.<br>
+Here are the additions we made for our project:
+ - added contributed color scheme (CSUF) colors
+ - added 12 random AI quotes as player made a move 
+ - added a Menu and sub menus
+ - added 7 different music titles
+ - added 2 game over sound effects
+ - background image for menu<br><br>
 
 
-
+###########################################################################
 
 References and credit:
 
@@ -32,7 +36,7 @@ Video walkthrough on programming the AI: https://youtu.be/MMLtza3CZFM
 
 ###########################################################################
 
-We also used AI code from Sergey Zakuraev which can be found here:
+We also watched Sergey Zakuraev implementation which can be found here:
 
 https://github.com/zakuraevs/connect4-ai/blob/master/connect4_ai_commented.py
 
