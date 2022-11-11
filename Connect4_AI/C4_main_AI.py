@@ -51,10 +51,10 @@ def play(level):
                 if turn == PLAYER:
                     # for when player one goes
                     pygame.draw.circle(screen, ORANGE, (posx, int(SQUARE_SIZE / 2)), RADIUS)
-            # update display
-            pygame.display.update()
+                # update display
+                pygame.display.update()
 
-            if event.type == pygame.MOUSEBUTTONUP:
+            if event.type == pygame.MOUSEBUTTONDOWN:
 
                 # put this again so when a player wins the circle does not stay on screen
                 pygame.draw.rect(screen, BLACK, (0, 0, width, SQUARE_SIZE))
@@ -73,6 +73,11 @@ def play(level):
                         the_quote = quotes[random_quote]
                         label_quote = quoteFont.render("AI SAYS: " + the_quote, 2, WHITE)
                         screen.blit(label_quote, (50, 30))
+                        # if the_quote == "HEY GOOGLE, PLAY 'OYE COMO VA'":
+                        #     pygame.mixer_music.load("music/oye.mp3")
+                        #     pygame.mixer_music.play(1)
+                        #     pygame.mixer_music.pause()
+                        #     pygame.mixer_music.play(1)
 
                         if winning_move(board, PLAYER_PIECE):
                             pygame.draw.rect(screen, BLACK, (0, 0, width, SQUARE_SIZE))
