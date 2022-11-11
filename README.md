@@ -9,7 +9,7 @@ Roya Zeinali<br>
 ###########################################################################
 
 ## Example Game Play:
-<img src="game_play.gif" alt="connect 4">
+<img src="new_game_play.gif" alt="connect 4">
 
 We started with the code for connect 4 without AI to familiarize ourselves with the code and functionality.<br>
 Here are the additions we made for our project:
