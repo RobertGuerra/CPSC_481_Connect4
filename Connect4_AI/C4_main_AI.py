@@ -10,7 +10,7 @@ BG = pygame.image.load("assets/Background.png")
 Player_end_game_sound = pygame.mixer.Sound("magical-game-over.wav")
 AI_end_game_sound = pygame.mixer.Sound("retro-game-over.wav")
 
-# for simple score keeping (resets when program closes)
+# used for simple score menu (resets when program is closed)
 player_score = 0
 AI_score = 0
 
@@ -128,7 +128,6 @@ def play(level):
         if game_over:
             pygame.time.delay(3000)
             high_score()
-            #main_menu()
 
 
 # main menu
@@ -444,12 +443,8 @@ def high_score():
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if OPTIONS_PLAYER_SCORE.checkForInput(HIGH_SCORE_MOUSE_POS):
-                    main_menu()
-                if OPTIONS_AI_SCORE.checkForInput(HIGH_SCORE_MOUSE_POS):
-                    difficulty()
                 if OPTIONS_SCORE_BACK.checkForInput(HIGH_SCORE_MOUSE_POS):
-                    music()
+                    main_menu()
 
         pygame.display.update()
 
