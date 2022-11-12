@@ -10,10 +10,16 @@ BG = pygame.image.load("assets/Background.png")
 Player_end_game_sound = pygame.mixer.Sound("magical-game-over.wav")
 AI_end_game_sound = pygame.mixer.Sound("retro-game-over.wav")
 
+player_score = 0
+AI_score = 0
+
 def get_font(size): # Returns Press-Start-2P in the desired size
     return pygame.font.Font("assets/font.ttf", size)
 
 def play(level):
+
+    global player_score
+    global AI_score
 
     game_over = False
     PLAYER = 0
@@ -86,6 +92,7 @@ def play(level):
                             game_over = True
                             pygame.mixer.music.stop()
                             pygame.mixer.Sound.play(Player_end_game_sound)
+                            player_score += 1
                         turn = AI
 
         # draw board
@@ -110,6 +117,7 @@ def play(level):
                     game_over = True
                     pygame.mixer.music.stop()
                     pygame.mixer.Sound.play(AI_end_game_sound)
+                    AI_score += 1
                 turn = PLAYER
 
         # draw board
@@ -118,7 +126,8 @@ def play(level):
 
         if game_over:
             pygame.time.delay(3000)
-            main_menu()
+            high_score()
+            #main_menu()
 
 
 # main menu
@@ -380,6 +389,66 @@ def music():
 
                 if MUSIC_OPTIONS_BACK.checkForInput(MUSIC_OPTIONS_MOUSE_POS):
                     options()
+
+        pygame.display.update()
+
+
+def high_score():
+    while True:
+        HIGH_SCORE_MOUSE_POS = pygame.mouse.get_pos()
+
+        screen.blit(BG, (0, 0))
+
+        OPTIONS_TEXT = get_font(24).render("NUMBER OF WINS", True, WHITE)
+        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(300, 50))
+        screen.blit(OPTIONS_TEXT, OPTIONS_RECT)
+
+        OPTIONS_PLAYER_SCORE = Button(image=None, pos=(200, 150),
+                                    text_input="PLAYER ONE", font=get_font(24), base_color=WHITE,
+                                    hovering_color=WHITE)
+
+        OPTIONS_PLAYER_SCORE.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_PLAYER_SCORE.update(screen)
+
+        OPTIONS_PLAYER_SCORE_NUM = Button(image=None, pos=(500, 150),
+                                      text_input=str(player_score), font=get_font(24), base_color=WHITE,
+                                      hovering_color=WHITE)
+
+        OPTIONS_PLAYER_SCORE_NUM.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_PLAYER_SCORE_NUM.update(screen)
+
+
+        OPTIONS_AI_SCORE = Button(image=None, pos=(100, 250),
+                                    text_input="AI", font=get_font(24), base_color=WHITE,
+                                    hovering_color=WHITE)
+
+        OPTIONS_AI_SCORE.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_AI_SCORE.update(screen)
+
+        OPTIONS_AI_SCORE_NUM = Button(image=None, pos=(500, 250),
+                                          text_input=str(AI_score), font=get_font(24), base_color=WHITE,
+                                          hovering_color=WHITE)
+
+        OPTIONS_AI_SCORE_NUM.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_AI_SCORE_NUM.update(screen)
+
+        OPTIONS_SCORE_BACK = Button(image=None, pos=(300, 350),
+                              text_input="BACK TO MAIN MENU", font=get_font(24), base_color=WHITE, hovering_color=ORANGE)
+
+        OPTIONS_SCORE_BACK.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_SCORE_BACK.update(screen)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if OPTIONS_PLAYER_SCORE.checkForInput(HIGH_SCORE_MOUSE_POS):
+                    main_menu()
+                if OPTIONS_AI_SCORE.checkForInput(HIGH_SCORE_MOUSE_POS):
+                    difficulty()
+                if OPTIONS_SCORE_BACK.checkForInput(HIGH_SCORE_MOUSE_POS):
+                    music()
 
         pygame.display.update()
 
