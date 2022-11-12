@@ -10,6 +10,7 @@ BG = pygame.image.load("assets/Background.png")
 Player_end_game_sound = pygame.mixer.Sound("magical-game-over.wav")
 AI_end_game_sound = pygame.mixer.Sound("retro-game-over.wav")
 
+# for simple score keeping (resets when program closes)
 player_score = 0
 AI_score = 0
 
