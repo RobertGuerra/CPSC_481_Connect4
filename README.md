@@ -6,7 +6,16 @@ Roberto Guerra<br>
 Dung Tran<br>
 Roya Zeinali<br>
 
-###########################################################################
+########################################################################### <br>
+
+
+Main Menu:   you can choose to play (takes you to options, (choose difficulty to play), look at scores, <br>
+(keeps track of scores for each difficulty level, but reset once program is quit), or quit <br>
+
+Options Menu: Here you can choose to play music(lags a bit) and difficulty <br>
+(once you choose difficulty game starts) and a back button to go back to options.<br>
+
+
 
 ## Example Game Play:
 <img src="new_game_play.gif" alt="connect 4">
@@ -25,17 +34,12 @@ Here are the additions we made for our project:
 
 References and credit:
 
-This project was built on code base from Keith Galli which can be found here:
+pygame documentation:  https://www.pygame.org/docs/
 
-Connect 4 programmed in python using pygame.
-
+This project was built on code base from Keith Galli which can be found in the following two links:
 Video walkthrough on programming this game: https://youtu.be/UYgyRArKDEs
 
-Video walkthrough on programming the AI: https://youtu.be/MMLtza3CZFM
-
-###########################################################################
-
+with the AI: https://youtu.be/MMLtza3CZFM
+---------------------
 We also watched Sergey Zakuraev implementation which can be found here:
-
 https://github.com/zakuraevs/connect4-ai/blob/master/connect4_ai_commented.py
-
