@@ -18,7 +18,7 @@ Options Menu: Here you can choose to play music(lags a bit) and difficulty <br>
 
 
 ## Example Game Play:
-<img src="Connect4_Demo.gif" alt="connect 4" width="500" height="500">
+<img src="Connect4_Demo.gif" alt="connect 4" width="300" height="300">
 
 We started with the code for connect 4 without AI to familiarize ourselves with the code and functionality.<br>
 Here are the additions we made for our project:
