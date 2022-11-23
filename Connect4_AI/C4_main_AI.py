@@ -5,22 +5,35 @@ import math
 import sys
 import random
 
-BG = pygame.image.load("assets/Background.png")
-
 Player_end_game_sound = pygame.mixer.Sound("magical-game-over.wav")
 AI_end_game_sound = pygame.mixer.Sound("retro-game-over.wav")
 
-# used for simple score menu (resets when program is closed)
-player_score = 0
-AI_score = 0
+# for keeping scores
+player_score_easy = 0
+player_score_medium = 0
+player_score_hard = 0
+player_score_insane = 0
+AI_score_easy = 0
+AI_score_medium = 0
+AI_score_hard = 0
+AI_score_insane = 0
 
 def get_font(size): # Returns Press-Start-2P in the desired size
     return pygame.font.Font("assets/font.ttf", size)
 
 def play(level):
 
-    global player_score
-    global AI_score
+    global player_score_easy
+    global player_score_medium
+    global player_score_hard
+    global player_score_insane
+    global AI_score_easy
+    global AI_score_medium
+    global AI_score_hard
+    global AI_score_insane
+
+
+
 
     game_over = False
     PLAYER = 0
@@ -35,7 +48,7 @@ def play(level):
 
     while not game_over:
 
-        pygame.time.wait(100)
+        #pygame.time.wait(100)
 
         quotes = ["YOUR ATTEMPTS ARE FUTILE", "YOU MUST TRAIN HARDER", "THE RED X IS RIGHT THERE", "SURE, BLAME YOUR ISP",
                   "IT'S GOOD TO BE AI", "QUIT NOW MORTAL", "HEY GOOGLE, PLAY 'OYE COMO VA'", "YOU ARE NOT GOOD AT THIS ARE YOU?",
@@ -80,11 +93,6 @@ def play(level):
                         the_quote = quotes[random_quote]
                         label_quote = quoteFont.render("AI SAYS: " + the_quote, 2, WHITE)
                         screen.blit(label_quote, (50, 30))
-                        # if the_quote == "HEY GOOGLE, PLAY 'OYE COMO VA'":
-                        #     pygame.mixer_music.load("music/oye.mp3")
-                        #     pygame.mixer_music.play(1)
-                        #     pygame.mixer_music.pause()
-                        #     pygame.mixer_music.play(1)
 
                         if winning_move(board, PLAYER_PIECE):
                             pygame.draw.rect(screen, BLACK, (0, 0, width, SQUARE_SIZE))
@@ -93,8 +101,16 @@ def play(level):
                             game_over = True
                             pygame.mixer.music.stop()
                             pygame.mixer.Sound.play(Player_end_game_sound)
-                            player_score += 1
+                            if level == 1:
+                                player_score_easy += 1
+                            elif level == 2:
+                                player_score_medium += 1
+                            elif level == 4:
+                                player_score_hard += 1
+                            elif level == 6:
+                                player_score_insane += 1
                         turn = AI
+                        print_board(board)
 
         # draw board
         draw_board(board)
@@ -118,16 +134,24 @@ def play(level):
                     game_over = True
                     pygame.mixer.music.stop()
                     pygame.mixer.Sound.play(AI_end_game_sound)
-                    AI_score += 1
+                    if level == 1:
+                        AI_score_easy += 1
+                    elif level == 2:
+                        AI_score_medium += 1
+                    elif level == 4:
+                        AI_score_hard += 1
+                    elif level == 6:
+                        AI_score_insane += 1
                 turn = PLAYER
+                print_board(board)
 
         # draw board
         draw_board(board)
         pygame.display.update()
 
         if game_over:
-            pygame.time.delay(3000)
-            high_score()
+            pygame.time.wait(3000)
+            main_menu()
 
 
 # main menu
@@ -142,16 +166,18 @@ def main_menu():
         MENU_TEXT = get_font(36).render("MAIN MENU", True, WHITE)
         MENU_RECT = MENU_TEXT.get_rect(center=(300, 100))
 
-        # PLAY_BUTTON = Button(None, pos=(300, 250),
-        #                      text_input="Difficulty", font=get_font(24), base_color=WHITE, hovering_color=ORANGE)
-        OPTIONS_BUTTON = Button(None, pos=(300, 250),
-                                text_input="PLAY", font=get_font(36), base_color="#d7fcd4", hovering_color=ORANGE)
-        QUIT_BUTTON = Button(None, pos=(300, 350),
+        OPTIONS_BUTTON = Button(None, pos=(300, 200),
+                                text_input="START", font=get_font(36), base_color="#d7fcd4", hovering_color=ORANGE)
+
+        SCORES_BUTTON = Button(None, pos=(300, 300),
+                             text_input="SCORES", font=get_font(36), base_color=WHITE, hovering_color=ORANGE)
+
+        QUIT_BUTTON = Button(None, pos=(300, 400),
                              text_input="QUIT", font=get_font(36), base_color="#d7fcd4", hovering_color=ORANGE)
 
         screen.blit(MENU_TEXT, MENU_RECT)
 
-        for button in [OPTIONS_BUTTON, QUIT_BUTTON]:
+        for button in [OPTIONS_BUTTON, SCORES_BUTTON, QUIT_BUTTON]:
             button.changeColor(MENU_MOUSE_POS)
             button.update(screen)
 
@@ -162,6 +188,8 @@ def main_menu():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if OPTIONS_BUTTON.checkForInput(MENU_MOUSE_POS):
                     options()
+                if SCORES_BUTTON.checkForInput(MENU_MOUSE_POS):
+                    high_score()
                 if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS):
                     pygame.quit()
                     sys.exit()
@@ -175,19 +203,19 @@ def options():
 
         screen.blit(BG, (0, 0))
 
-        OPTIONS_TEXT = get_font(24).render("SELECT AN OPTION.", True, WHITE)
+        OPTIONS_TEXT = get_font(30).render("SELECT AN OPTION", True, WHITE)
         OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(300, 50))
         screen.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
         OPTIONS_DIFFICULTY = Button(image=None, pos=(300, 150),
-                                    text_input="DIFFICULTY", font=get_font(36), base_color=WHITE,
+                                    text_input="PLAY", font=get_font(28), base_color=WHITE,
                                     hovering_color=ORANGE)
 
         OPTIONS_DIFFICULTY.changeColor(OPTIONS_MOUSE_POS)
         OPTIONS_DIFFICULTY.update(screen)
 
         OPTIONS_MUSIC = Button(image=None, pos=(300, 250),
-                                    text_input="MUSIC", font=get_font(36), base_color=WHITE,
+                                    text_input="MUSIC", font=get_font(28), base_color=WHITE,
                                     hovering_color=ORANGE)
 
         OPTIONS_MUSIC.changeColor(OPTIONS_MOUSE_POS)
@@ -220,36 +248,36 @@ def difficulty():
 
         screen.blit(BG, (0, 0))
 
-        OPTIONS_TEXT = get_font(18).render("CHOOSE GAME MODE", True, WHITE)
+        OPTIONS_TEXT = get_font(18).render("CHOOSE DIFFICULTY TO PLAY", True, WHITE)
         OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(300, 50))
         screen.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
         DIFFICULTY_EASY = Button(image=None, pos=(300, 150),
-                                 text_input="EASY", font=get_font(36), base_color=WHITE,
+                                 text_input="EASY", font=get_font(24), base_color=WHITE,
                                  hovering_color=ORANGE)
 
         DIFFICULTY_EASY.changeColor(DIFFICULTY_MOUSE_POS)
         DIFFICULTY_EASY.update(screen)
 
-        DIFFICULTY_MEDIUM = Button(image=None, pos=(300, 250),
-                                   text_input="MEDIUM", font=get_font(36), base_color=WHITE, hovering_color=ORANGE)
+        DIFFICULTY_MEDIUM = Button(image=None, pos=(300, 200),
+                                   text_input="MEDIUM", font=get_font(24), base_color=WHITE, hovering_color=ORANGE)
 
         DIFFICULTY_MEDIUM.changeColor(DIFFICULTY_MOUSE_POS)
         DIFFICULTY_MEDIUM.update(screen)
 
-        DIFFICULTY_HARD = Button(image=None, pos=(300, 350),
-                                 text_input="HARD", font=get_font(36), base_color=WHITE, hovering_color=ORANGE)
+        DIFFICULTY_HARD = Button(image=None, pos=(300, 250),
+                                 text_input="HARD", font=get_font(24), base_color=WHITE, hovering_color=ORANGE)
 
         DIFFICULTY_HARD.changeColor(DIFFICULTY_MOUSE_POS)
         DIFFICULTY_HARD.update(screen)
 
-        DIFFICULTY_INSANE = Button(image=None, pos=(300, 450),
-                                 text_input="INSANE", font=get_font(36), base_color=WHITE, hovering_color=ORANGE)
+        DIFFICULTY_INSANE = Button(image=None, pos=(300, 300),
+                                 text_input="INSANE", font=get_font(24), base_color=WHITE, hovering_color=ORANGE)
 
         DIFFICULTY_INSANE.changeColor(DIFFICULTY_MOUSE_POS)
         DIFFICULTY_INSANE.update(screen)
 
-        DIFFICULTY_BACK = Button(image=None, pos=(300, 550),
+        DIFFICULTY_BACK = Button(image=None, pos=(300, 400),
                               text_input="BACK TO OPTIONS", font=get_font(36), base_color=WHITE, hovering_color=ORANGE)
 
         DIFFICULTY_BACK.changeColor(DIFFICULTY_MOUSE_POS)
@@ -403,34 +431,107 @@ def high_score():
         OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(300, 50))
         screen.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
-        OPTIONS_PLAYER_SCORE = Button(image=None, pos=(200, 150),
-                                    text_input="PLAYER ONE", font=get_font(24), base_color=WHITE,
+        # score column titles
+        OPTIONS_SCORE_EASY = Button(image=None, pos=(250, 100),
+                                      text_input="EASY", font=get_font(10), base_color=GREEN,
+                                      hovering_color=GREEN)
+
+        OPTIONS_SCORE_EASY.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_SCORE_EASY.update(screen)
+
+        OPTIONS_SCORE_MEDIUM = Button(image=None, pos=(350, 100),
+                                    text_input="MEDIUM", font=get_font(10), base_color=YELLOW,
+                                    hovering_color=YELLOW)
+
+        OPTIONS_SCORE_MEDIUM.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_SCORE_MEDIUM.update(screen)
+
+        OPTIONS_SCORE_HARD = Button(image=None, pos=(450, 100),
+                                    text_input="HARD", font=get_font(10), base_color=ORANGE,
+                                    hovering_color=ORANGE)
+
+        OPTIONS_SCORE_HARD.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_SCORE_HARD.update(screen)
+
+        OPTIONS_SCORE_INSANE = Button(image=None, pos=(550, 100),
+                                    text_input="INSANE", font=get_font(10), base_color=RED,
+                                    hovering_color=RED)
+
+        OPTIONS_SCORE_INSANE.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_SCORE_INSANE.update(screen)
+
+        # player scores
+        OPTIONS_PLAYER_SCORE = Button(image=None, pos=(100, 150),
+                                    text_input="PLAYER", font=get_font(24), base_color=WHITE,
                                     hovering_color=WHITE)
 
         OPTIONS_PLAYER_SCORE.changeColor(HIGH_SCORE_MOUSE_POS)
         OPTIONS_PLAYER_SCORE.update(screen)
 
-        OPTIONS_PLAYER_SCORE_NUM = Button(image=None, pos=(500, 150),
-                                      text_input=str(player_score), font=get_font(24), base_color=WHITE,
-                                      hovering_color=WHITE)
+        OPTIONS_PLAYER_SCORE_EASY = Button(image=None, pos=(250, 150),
+                                      text_input=str(player_score_easy), font=get_font(17), base_color=GREEN,
+                                      hovering_color=GREEN)
 
-        OPTIONS_PLAYER_SCORE_NUM.changeColor(HIGH_SCORE_MOUSE_POS)
-        OPTIONS_PLAYER_SCORE_NUM.update(screen)
+        OPTIONS_PLAYER_SCORE_EASY.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_PLAYER_SCORE_EASY.update(screen)
+
+        OPTIONS_PLAYER_SCORE_MEDIUM = Button(image=None, pos=(350, 150),
+                                           text_input=str(player_score_medium), font=get_font(17), base_color=YELLOW,
+                                           hovering_color=YELLOW)
+
+        OPTIONS_PLAYER_SCORE_MEDIUM.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_PLAYER_SCORE_MEDIUM.update(screen)
+
+        OPTIONS_PLAYER_SCORE_HARD = Button(image=None, pos=(450, 150),
+                                             text_input=str(player_score_hard), font=get_font(17), base_color=ORANGE,
+                                             hovering_color=ORANGE)
+
+        OPTIONS_PLAYER_SCORE_HARD.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_PLAYER_SCORE_HARD.update(screen)
+
+        OPTIONS_PLAYER_SCORE_INSANE = Button(image=None, pos=(550, 150),
+                                           text_input=str(player_score_insane), font=get_font(17), base_color=RED,
+                                           hovering_color=RED)
+
+        OPTIONS_PLAYER_SCORE_INSANE.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_PLAYER_SCORE_INSANE.update(screen)
 
 
-        OPTIONS_AI_SCORE = Button(image=None, pos=(100, 250),
+        # AI scores
+        OPTIONS_AI_SCORE = Button(image=None, pos=(50, 250),
                                     text_input="AI", font=get_font(24), base_color=WHITE,
                                     hovering_color=WHITE)
 
         OPTIONS_AI_SCORE.changeColor(HIGH_SCORE_MOUSE_POS)
         OPTIONS_AI_SCORE.update(screen)
 
-        OPTIONS_AI_SCORE_NUM = Button(image=None, pos=(500, 250),
-                                          text_input=str(AI_score), font=get_font(24), base_color=WHITE,
-                                          hovering_color=WHITE)
+        OPTIONS_AI_SCORE_EASY = Button(image=None, pos=(250, 250),
+                                          text_input=str(AI_score_easy), font=get_font(17), base_color=GREEN,
+                                          hovering_color=GREEN)
 
-        OPTIONS_AI_SCORE_NUM.changeColor(HIGH_SCORE_MOUSE_POS)
-        OPTIONS_AI_SCORE_NUM.update(screen)
+        OPTIONS_AI_SCORE_EASY.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_AI_SCORE_EASY.update(screen)
+
+        OPTIONS_AI_SCORE_MEDIUM = Button(image=None, pos=(350, 250),
+                                       text_input=str(AI_score_medium), font=get_font(17), base_color=YELLOW,
+                                       hovering_color=YELLOW)
+
+        OPTIONS_AI_SCORE_MEDIUM.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_AI_SCORE_MEDIUM.update(screen)
+
+        OPTIONS_AI_SCORE_HARD = Button(image=None, pos=(450, 250),
+                                       text_input=str(AI_score_hard), font=get_font(17), base_color=ORANGE,
+                                       hovering_color=ORANGE)
+
+        OPTIONS_AI_SCORE_HARD.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_AI_SCORE_HARD.update(screen)
+
+        OPTIONS_AI_SCORE_INSANE = Button(image=None, pos=(550, 250),
+                                       text_input=str(AI_score_insane), font=get_font(17), base_color=RED,
+                                       hovering_color=RED)
+
+        OPTIONS_AI_SCORE_INSANE.changeColor(HIGH_SCORE_MOUSE_POS)
+        OPTIONS_AI_SCORE_INSANE.update(screen)
 
         OPTIONS_SCORE_BACK = Button(image=None, pos=(300, 350),
                               text_input="BACK TO MAIN MENU", font=get_font(24), base_color=WHITE, hovering_color=ORANGE)
