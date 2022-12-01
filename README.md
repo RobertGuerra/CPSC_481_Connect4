@@ -18,7 +18,7 @@ Options Menu: Here you can choose to play music(lags a bit) and difficulty <br>
 
 
 
-## Example Game Play:<tb><tb><tb> updated GUI
+## Old GUI:&nbsp&nbsp&nbspupdated GUI
 <div><img src="Connect4_Demo.gif" alt="connect 4" width="300" height="300">
  <img src="Connect4_Demo2.gif" alt="connect 4" width="300" height="300"></div>
 
