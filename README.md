@@ -28,8 +28,8 @@ Here are the additions we made for our project:
  - added 12 random AI quotes as player made a move 
  - added a Menu and sub menus
  - added 7 different music titles
- - added 2 game over sound effects
- - background image for menu<br><br>
+ - added 2 game over sound effects and sound effect when making a selection
+ - background images for menus<br><br>
 
 
 ###########################################################################
