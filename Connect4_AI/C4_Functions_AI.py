@@ -36,7 +36,9 @@ height = (ROW_COUNT + 1) * SQUARE_SIZE
 size = (width, height)
 RADIUS = int(SQUARE_SIZE/2 - 5)
 
-BG = pygame.image.load("assets/Background.png")
+BG = pygame.image.load("assets/bg_color.jpg")
+BG_SCORE = pygame.image.load("assets/bg_score.jpg")
+BG_MUSIC = pygame.image.load("assets/bg_music.jpg")
 
 YellowChip = pygame.image.load("assets/ChipYellow.png")
 YellowChipScaled = pygame.transform.scale(YellowChip, (90, 90))
@@ -59,7 +61,6 @@ clock.tick(30)
 # font for the screen text
 textFont = pygame.font.SysFont("Consolas", 36)
 quoteFont = pygame.font.SysFont("Consolas", 24)
-
 
 
 def create_board(): # makes initial array board filled with zeros
@@ -146,7 +147,7 @@ def evaluate_window(window, piece):
 
     return score
 
-# scoring the overall attractiveness of a board after a piece has been droppped
+# scoring the overall attractiveness of a board after a piece has been dropped
 def score_position(board, piece):
 
     score = 0
@@ -309,5 +310,3 @@ def draw_board(board):
 
     # update display
     pygame.display.update()
-
-
