@@ -4,8 +4,8 @@ CPSC 481 class project -  connect 4 with AI
 
 Contributors:<br>
 Roberto Guerra - Designed UI and game logic<br>
-Dung Tran - Assisted with code<br>
-Roya Zeinali - Assisted with UI development and Final report<br>
+Dung Tran - Assisted with code and Final Report<br>
+Roya Zeinali - Assisted with code, UI development, and Final report<br>
 
 ########################################################################### <br>
 
