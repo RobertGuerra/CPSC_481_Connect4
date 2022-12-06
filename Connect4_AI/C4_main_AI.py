@@ -57,8 +57,7 @@ def play(level):
     draw_board(board)
 
     # let's randomize who goes first
-    #turn = random.randint(PLAYER, AI)
-    turn = PLAYER
+    turn = random.randint(PLAYER, AI)
 
     while not game_over:
 
@@ -85,11 +84,7 @@ def play(level):
                     pygame.draw.circle(screen, ORANGE, (posx, int(SQUARE_SIZE / 2)), RADIUS)
                 # update display
                 pygame.display.update()
-
-            if event.type == pygame.MOUSEBUTTONDOWN:
-
-                x, y = pygame.mouse.get_pos()
-                print("( " + str(x), str(y) + " )")
+                
 
                 # put this again so when a player wins the circle does not stay on screen
                 pygame.draw.rect(screen, BLACK, (0, 0, width, SQUARE_SIZE))
