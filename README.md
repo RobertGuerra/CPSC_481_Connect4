@@ -31,6 +31,7 @@ Here are the additions we made for our project:
  - added 2 game over sound effects and sound effect when making a selection
  - background images for menus<br><br>
 
+Link to play game (hosted on Replit): https://replit.com/@RobertoGuerra2/connect4
 
 ###########################################################################
 
