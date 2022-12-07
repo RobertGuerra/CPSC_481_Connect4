@@ -62,6 +62,22 @@ clock.tick(30)
 textFont = pygame.font.SysFont("Consolas", 36)
 quoteFont = pygame.font.SysFont("Consolas", 24)
 
+# for winner_winner function
+# x-coord
+row1_x_coord = 44
+row2_x_coord = 134
+row3_x_coord = 224
+row4_x_coord = 314
+row5_x_coord = 405
+row6_x_coord = 494
+row7_x_coord = 584
+# y-coord
+row1_y_coord = 586
+row2_y_coord = 496
+row3_y_coord = 406
+row4_y_coord = 316
+row5_y_coord = 225
+row6_y_coord = 134
 
 def create_board(): # makes initial array board filled with zeros
     game_board = np.zeros((ROW_COUNT,COLUMN_COUNT))
@@ -309,4 +325,913 @@ def draw_board(board):
                 pygame.draw.circle(screen, WHITE,(int(c * SQUARE_SIZE + SQUARE_SIZE / 2), height - int(r * SQUARE_SIZE + SQUARE_SIZE / 2)),RADIUS)
 
     # update display
+    pygame.display.update()
+
+
+def winner_winner(board, piece):
+
+    for r in range(ROW_COUNT):
+        row_array = [int(i) for i in list(board[r,:])]
+        for c in range(COLUMN_COUNT - 3):
+            window = row_array[c:c+WINDOW_LENGTH]
+
+            # Horizontal
+            if r == 0:
+                if window.count(piece) == WINDOW_LENGTH and c == 0:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row1_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row1_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 1:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row1_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row1_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 2:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row1_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row7_x_coord, row1_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 3:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row7_x_coord, row1_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row7_x_coord, row1_y_coord), RADIUS)
+
+            if r == 1:
+                # next row up (row 2)
+                if window.count(piece) == WINDOW_LENGTH and c == 0:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row2_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row2_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 1:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row2_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row2_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 2:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row2_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row2_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 3:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row7_x_coord, row2_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row7_x_coord, row2_y_coord), RADIUS)
+
+            if r == 2:
+                # next row up (row 3)
+                if window.count(piece) == WINDOW_LENGTH and c == 0:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row3_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row3_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 1:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row3_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row3_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 2:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row3_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row3_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 3:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row7_x_coord, row3_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row7_x_coord, row3_y_coord), RADIUS)
+
+            if r == 3:
+                # next row up (row 4)
+                if window.count(piece) == WINDOW_LENGTH and c == 0:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row4_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row4_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 1:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row4_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row4_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 2:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row4_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row4_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 3:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row7_x_coord, row4_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row7_x_coord, row4_y_coord), RADIUS)
+            if r == 4:
+                # next row up (row 5)
+                if window.count(piece) == WINDOW_LENGTH and c == 0:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row5_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row5_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 1:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row5_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row5_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 2:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row5_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row5_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 3:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row7_x_coord, row5_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row7_x_coord, row5_y_coord), RADIUS)
+
+            if r == 5:
+                # next row up (row 6)
+                if window.count(piece) == WINDOW_LENGTH and c == 0:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row6_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row6_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 1:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row6_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row6_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 2:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row6_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row6_y_coord), RADIUS)
+
+                if window.count(piece) == WINDOW_LENGTH and c == 3:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row7_x_coord, row6_y_coord), RADIUS)
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row7_x_coord, row6_y_coord), RADIUS)
+
+
+
+
+    # Vertical score
+    for c in range(COLUMN_COUNT):
+        col_array = [int(i) for i in list(board[:, c])]
+        for r in range(ROW_COUNT - 3):
+            window = col_array[r:r+WINDOW_LENGTH]
+
+            # first column
+            if r == 0:
+                if window.count(piece) == WINDOW_LENGTH and c == 0:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row4_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row4_y_coord), RADIUS)
+
+            if r == 1:
+                if window.count(piece) == WINDOW_LENGTH and c == 0:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row5_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row5_y_coord), RADIUS)
+
+            if r == 2:
+                if window.count(piece) == WINDOW_LENGTH and c == 0:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row6_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row6_y_coord), RADIUS)
+
+            # second column
+            if r == 0:
+                if window.count(piece) == WINDOW_LENGTH and c == 1:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row4_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row4_y_coord), RADIUS)
+
+            if r == 1:
+                if window.count(piece) == WINDOW_LENGTH and c == 1:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row5_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row5_y_coord), RADIUS)
+
+            if r == 2:
+                if window.count(piece) == WINDOW_LENGTH and c == 1:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row6_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row6_y_coord), RADIUS)
+
+            # third column
+            if r == 0:
+                if window.count(piece) == WINDOW_LENGTH and c == 2:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row4_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row4_y_coord), RADIUS)
+
+            if r == 1:
+                if window.count(piece) == WINDOW_LENGTH and c == 2:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row5_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row5_y_coord), RADIUS)
+
+            if r == 2:
+                if window.count(piece) == WINDOW_LENGTH and c == 2:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row6_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row6_y_coord), RADIUS)
+
+            # fourth column
+            if r == 0:
+                if window.count(piece) == WINDOW_LENGTH and c == 3:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row4_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row4_y_coord), RADIUS)
+
+            if r == 1:
+                if window.count(piece) == WINDOW_LENGTH and c == 3:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row5_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row5_y_coord), RADIUS)
+
+            if r == 2:
+                if window.count(piece) == WINDOW_LENGTH and c == 3:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row6_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row6_y_coord), RADIUS)
+
+            # fifth column
+            if r == 0:
+                if window.count(piece) == WINDOW_LENGTH and c == 4:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row4_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row4_y_coord), RADIUS)
+
+            if r == 1:
+                if window.count(piece) == WINDOW_LENGTH and c == 4:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row5_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row5_y_coord), RADIUS)
+            if r == 2:
+                if window.count(piece) == WINDOW_LENGTH and c == 4:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row6_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row6_y_coord), RADIUS)
+
+            # sixth column
+            if r == 0:
+                if window.count(piece) == WINDOW_LENGTH and c == 5:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row4_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row4_y_coord), RADIUS)
+
+            if r == 1:
+                if window.count(piece) == WINDOW_LENGTH and c == 5:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row5_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row5_y_coord), RADIUS)
+
+            if r == 2:
+                if window.count(piece) == WINDOW_LENGTH and c == 5:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row6_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row6_y_coord), RADIUS)
+
+
+
+    # Positively sloped diagonal score
+    for r in range(ROW_COUNT - 3):
+        for c in range(COLUMN_COUNT - 3):
+            window = [board[r+i][c+i] for i in range(WINDOW_LENGTH)]
+
+            # first diagonal starting from bottom right. All subsequent diagonals go from right to left.
+            if r == 0:
+                if window.count(piece) == WINDOW_LENGTH and c == 3:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row7_x_coord, row4_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row7_x_coord, row4_y_coord), RADIUS)
+
+            if r == 0:
+                if window.count(piece) == WINDOW_LENGTH and c == 2:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row4_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row4_y_coord), RADIUS)
+            if r == 1:
+                if window.count(piece) == WINDOW_LENGTH and c == 3:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row7_x_coord, row5_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row7_x_coord, row4_y_coord), RADIUS)
+            if r == 0:
+                if window.count(piece) == WINDOW_LENGTH and c == 1:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row4_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row4_y_coord), RADIUS)
+            if r == 1:
+                if window.count(piece) == WINDOW_LENGTH and c == 2:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row5_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row5_y_coord), RADIUS)
+            if r == 2:
+                if window.count(piece) == WINDOW_LENGTH and c == 3:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row7_x_coord, row6_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row7_x_coord, row6_y_coord), RADIUS)
+            if r == 0:
+                if window.count(piece) == WINDOW_LENGTH and c == 0:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row4_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row1_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row4_y_coord), RADIUS)
+            if r == 1:
+                if window.count(piece) == WINDOW_LENGTH and c == 1:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row5_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row5_y_coord), RADIUS)
+            if r == 2:
+                if window.count(piece) == WINDOW_LENGTH and c == 2:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row6_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row6_y_coord), RADIUS)
+            if r == 1:
+                if window.count(piece) == WINDOW_LENGTH and c == 0:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row6_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row6_y_coord), RADIUS)
+            if r == 2:
+                if window.count(piece) == WINDOW_LENGTH and c == 1:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row6_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row6_y_coord), RADIUS)
+            if r == 2:
+                if window.count(piece) == WINDOW_LENGTH and c == 0:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row6_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row6_y_coord), RADIUS)
+
+
+
+    # Negatively sloped diagonal score
+    for r in range(3, ROW_COUNT - 1):
+        for c in range(COLUMN_COUNT - 3):
+            # (2, 0)
+            window = [board[r - i][c + i] for i in range(WINDOW_LENGTH)]
+
+            # starting from bottom left and then all subsequent ones move to the right
+            if r == 3:
+                if window.count(piece) == WINDOW_LENGTH and c == 0:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row1_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row1_y_coord), RADIUS)
+            if r == 4:
+                if window.count(piece) == WINDOW_LENGTH and c == 0:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row2_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row2_y_coord), RADIUS)
+            if r == 3:
+                if window.count(piece) == WINDOW_LENGTH and c == 1:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row1_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row1_y_coord), RADIUS)
+            if r == 5:
+                if window.count(piece) == WINDOW_LENGTH and c == 0:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row1_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row3_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row1_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row3_y_coord), RADIUS)
+            if r == 4:
+                if window.count(piece) == WINDOW_LENGTH and c == 1:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row2_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row2_y_coord), RADIUS)
+            if r == 3:
+                if window.count(piece) == WINDOW_LENGTH and c == 2:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row1_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row1_y_coord), RADIUS)
+            if r == 5:
+                if window.count(piece) == WINDOW_LENGTH and c == 1:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row2_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row3_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row2_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row3_y_coord), RADIUS)
+            if r == 4:
+                if window.count(piece) == WINDOW_LENGTH and c == 2:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row2_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row2_y_coord), RADIUS)
+            if r == 3:
+                if window.count(piece) == WINDOW_LENGTH and c == 3:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row7_x_coord, row1_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row2_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row7_x_coord, row1_y_coord), RADIUS)
+            if r == 5:
+                if window.count(piece) == WINDOW_LENGTH and c == 2:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row3_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row3_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row3_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row4_y_coord), RADIUS)
+            if r == 4:
+                if window.count(piece) == WINDOW_LENGTH and c == 3:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row7_x_coord, row2_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row3_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row7_x_coord, row2_y_coord), RADIUS)
+            if r == 5:
+                if window.count(piece) == WINDOW_LENGTH and c == 3:
+                    if piece == PLAYER_PIECE:
+                        pygame.draw.circle(screen, YELLOW, (row4_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row5_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row6_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, YELLOW, (row7_x_coord, row3_y_coord), RADIUS)
+
+                    elif piece == AI_PIECE:
+                        pygame.draw.circle(screen, RED, (row4_x_coord, row6_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row5_x_coord, row5_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row6_x_coord, row4_y_coord), RADIUS)
+                        pygame.draw.circle(screen, RED, (row7_x_coord, row3_y_coord), RADIUS)
+
     pygame.display.update()
