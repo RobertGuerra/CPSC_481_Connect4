@@ -84,7 +84,11 @@ def play(level):
                     pygame.draw.circle(screen, ORANGE, (posx, int(SQUARE_SIZE / 2)), RADIUS)
                 # update display
                 pygame.display.update()
-                
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+
+                x, y = pygame.mouse.get_pos()
+                print("( " + str(x), str(y) + " )")
 
                 # put this again so when a player wins the circle does not stay on screen
                 pygame.draw.rect(screen, BLACK, (0, 0, width, SQUARE_SIZE))
@@ -160,8 +164,8 @@ def play(level):
                         AI_score_hard += 1
                     elif level == 4:
                         AI_score_insane += 1
-
                     Player_losses += 1
+
                 turn = PLAYER
                 print_board(board)
 
@@ -170,6 +174,10 @@ def play(level):
         pygame.display.update()
 
         if game_over:
+            if winning_move(board, PLAYER_PIECE):
+                winner_winner(board, PLAYER_PIECE)
+            if winning_move(board, AI_PIECE):
+                winner_winner(board, AI_PIECE)
             Games_played += 1
             pygame.time.wait(3000)
             main_menu()
